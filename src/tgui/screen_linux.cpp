@@ -3,7 +3,8 @@
 #ifdef TGUI_LINUX
 
 namespace tgui {
-screen::position screen_linux::get_size() {
+namespace screen {
+position get_size() {
 	winsize w;
 	position size;
 
@@ -15,10 +16,10 @@ screen::position screen_linux::get_size() {
 	return size;
 }
 
-screen::position screen_linux::get_cursor_position() {
+position get_cursor_position() {
 	position size;
 
-	std::cout << csi << "6n" << std::flush;
+	std::cout << details::csi << "6n" << std::flush;
 
 	std::cin.ignore(2);
 	std::cin >> size.rows;
@@ -27,6 +28,7 @@ screen::position screen_linux::get_cursor_position() {
 	std::cin.ignore(1);
 
 	return size;
+}
 }
 }
 

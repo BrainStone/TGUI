@@ -14,16 +14,11 @@
 #include <unistd.h>
 
 namespace tgui {
-class screen_linux: public screen_base {
-private:
-	std::string csi = "\033[";
-
-public:
-	virtual position get_size();
-	virtual position get_cursor_position();
-};
-
-typedef screen_linux screen;
+namespace screen {
+namespace details {
+const std::string csi = "\033[";
+}
+}
 }
 
 #endif // #ifdef TGUI_LINUX

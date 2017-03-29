@@ -6,8 +6,7 @@
 #include <cstddef>
 
 namespace tgui {
-class screen_base {
-public:
+namespace screen {
 	typedef int coord_type;
 
 	struct position {
@@ -34,23 +33,21 @@ public:
 		WHITE
 	};
 
-	virtual ~screen_base();
+	position get_size();
+	position get_cursor_position();
+	bool get_cursor_visible();
 
-	virtual position get_size() = 0;
-	virtual position get_cursor_position() = 0;
-	virtual bool get_cursor_visible() = 0;
+	void set_cursor_position(const position& pos);
+	void move_cursor_position(const position& pos);
+	void set_color(const color& foreground, const color& background);
+	void set_foreground_color(const color& foreground);
+	void set_background_color(const color& background);
+	void get_cursor_visible(bool visibility);
 
-	virtual void set_cursor_position(const position& pos) = 0;
-	virtual void move_cursor_position(const position& pos) = 0;
-	virtual void set_color(const color& foreground, const color& background) = 0;
-	virtual void set_foreground_color(const color& foreground) = 0;
-	virtual void set_background_color(const color& background) = 0;
-	virtual void get_cursor_visible(bool visibility) = 0;
-
-	virtual void clear_screen() = 0;
-	virtual void ring_bell() = 0;
-	virtual void flash_screen() = 0;
-};
+	void clear_screen();
+	void ring_bell();
+	void flash_screen();
+}
 }
 
 #endif // #ifndef TGUI_TGUI_SCREEN_BASE_HPP
