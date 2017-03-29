@@ -217,9 +217,9 @@ else
 	@$(INSTALL_PROGRAM) $(BIN_PATH)/$(BIN_NAME) $(DESTDIR)$(INSTALL_PREFIX)/lib
 	@echo "Installing headers to $(DESTDIR)$(INSTALL_PREFIX)/include"
 	@(cd $(SRC_PATH); for header in $(HEADERS); do dir="$(DESTDIR)$(INSTALL_PREFIX)/include/$$(dirname "$$header")"; mkdir -p "$$dir"; $(INSTALL_DATA) "$$header" "$$dir";done)
-	ifeq ($(BIN_TYPE), dynamic_library)
-		@ldconfig
-	endif
+ifeq ($(BIN_TYPE), dynamic_library)
+	@ldconfig
+endif
 endif
 
 # Uninstalls the program
@@ -233,9 +233,9 @@ else
 	@$(RM) $(DESTDIR)$(INSTALL_PREFIX)/lib/$(BIN_NAME)
 	@echo "Removing headers from $(DESTDIR)$(INSTALL_PREFIX)/include"
 	@(cd $(DESTDIR)$(INSTALL_PREFIX)/include; $(RM) $(HEADERS))
-	ifeq ($(BIN_TYPE), dynamic_library)
-		@ldconfig
-	endif
+ifeq ($(BIN_TYPE), dynamic_library)
+	@ldconfig
+endif
 endif
 
 # Removes all build files
