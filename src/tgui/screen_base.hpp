@@ -47,7 +47,9 @@ public:
 	virtual void set_background_color(const color& background) = 0;
 	virtual void get_cursor_visible(bool visibility) = 0;
 
+	virtual void clear_screen() = 0;
 	virtual void ring_bell() = 0;
+	virtual void flash_screen() = 0;
 };
 }
 
