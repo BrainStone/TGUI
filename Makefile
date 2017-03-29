@@ -254,7 +254,7 @@ $(BIN_PATH)/$(BIN_NAME): $(OBJECTS)
 ifeq ($(BIN_TYPE), executable)
 	$(CMD_PREFIX)$(CXX) $(OBJECTS) $(LDFLAGS) -o $@
 else ifeq ($(BIN_TYPE), static_library)
-	$(CMD_PREFIX)ar rcs $@ $(OBJECTS)
+	$(CMD_PREFIX)$(AR) rcs $@ $(OBJECTS)
 else ifeq ($(BIN_TYPE), dynamic_library)
 	$(CMD_PREFIX)$(CXX) $(OBJECTS) -shared $(LDFLAGS) -o $@
 endif
