@@ -3,13 +3,32 @@
 #ifdef TGUI_WINDOWS
 
 namespace tgui {
-screen::position screen_windows::get_size() {
+HANDLE screen_windows::hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+
+CONSOLE_SCREEN_BUFFER_INFO screen_windows::get_console_screen_buffer_info() {
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
+
+	GetConsoleScreenBufferInfo(hStdout, &csbi);
+
+	return csbi;
+}
+
+screen::position screen_windows::get_size() {
+	CONSOLE_SCREEN_BUFFER_INFO csbi = get_console_screen_buffer_info();
 	position size;
 
-	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
-	size.rows = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
-	size.columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+	size.rows = csbi.dwMaximumWindowSize.X;
+	size.columns = csbi.dwMaximumWindowSize.X;
+
+	return size;
+}
+
+screen::position screen_windows::get_cursor_position() {
+	CONSOLE_SCREEN_BUFFER_INFO csbi = get_console_screen_buffer_info();
+	position size;
+
+	size.rows = csbi.dwCursorPosition.X;
+	size.columns = csbi.dwCursorPosition.Y;
 
 	return size;
 }

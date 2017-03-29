@@ -11,8 +11,14 @@
 
 namespace tgui {
 class screen_windows: public screen_base {
+private:
+	static HANDLE hStdout;
+
+	CONSOLE_SCREEN_BUFFER_INFO get_console_screen_buffer_info();
+
 public:
 	virtual position get_size();
+	virtual position get_cursor_position();
 };
 
 typedef screen_windows screen;
