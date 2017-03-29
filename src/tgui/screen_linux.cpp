@@ -29,6 +29,10 @@ position get_cursor_position() {
 
 	return size;
 }
+
+void set_cursor_position(const position& pos) {
+	std::cout << details::csi << pos.row << ';' << pos.column << 'H';
+}
 }
 }
 

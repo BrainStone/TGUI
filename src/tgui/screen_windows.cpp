@@ -31,6 +31,12 @@ position get_cursor_position() {
 
 	return size;
 }
+
+void set_cursor_position(const position& pos) {
+	COORD cursor( { pos.row, pos.column });
+
+	SetConsoleCursorPosition(details::hStdout, cursor);
+}
 }
 }
 
