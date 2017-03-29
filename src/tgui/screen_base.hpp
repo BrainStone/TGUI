@@ -46,6 +46,8 @@ public:
 	virtual void set_foreground_color(const color& foreground) = 0;
 	virtual void set_background_color(const color& background) = 0;
 	virtual void get_cursor_visible(bool visibility) = 0;
+
+	virtual void ring_bell() = 0;
 };
 }
 
