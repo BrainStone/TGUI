@@ -10,8 +10,8 @@ position get_size() {
 
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 
-	size.rows = w.ws_row;
-	size.columns = w.ws_col;
+	size.row = w.ws_row;
+	size.column = w.ws_col;
 
 	return size;
 }
@@ -22,9 +22,9 @@ position get_cursor_position() {
 	std::cout << details::csi << "6n" << std::flush;
 
 	std::cin.ignore(2);
-	std::cin >> size.rows;
+	std::cin >> size.row;
 	std::cin.ignore(1);
-	std::cin >> size.columns;
+	std::cin >> size.column;
 	std::cin.ignore(1);
 
 	return size;

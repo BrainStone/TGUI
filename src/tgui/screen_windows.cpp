@@ -16,8 +16,8 @@ position get_size() {
 	CONSOLE_SCREEN_BUFFER_INFO csbi = details::get_console_screen_buffer_info();
 	position size;
 
-	size.rows = csbi.dwMaximumWindowSize.X;
-	size.columns = csbi.dwMaximumWindowSize.X;
+	size.row = csbi.dwMaximumWindowSize.X;
+	size.column = csbi.dwMaximumWindowSize.X;
 
 	return size;
 }
@@ -26,8 +26,8 @@ position get_cursor_position() {
 	CONSOLE_SCREEN_BUFFER_INFO csbi = details::get_console_screen_buffer_info();
 	position size;
 
-	size.rows = csbi.dwCursorPosition.X;
-	size.columns = csbi.dwCursorPosition.Y;
+	size.row = csbi.dwCursorPosition.X;
+	size.column = csbi.dwCursorPosition.Y;
 
 	return size;
 }

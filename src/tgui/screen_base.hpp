@@ -10,8 +10,8 @@ namespace screen {
 	typedef int coord_type;
 
 	struct position {
-		coord_type rows;
-		coord_type columns;
+		coord_type row;
+		coord_type column;
 	};
 
 	enum class color {
