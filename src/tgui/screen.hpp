@@ -22,8 +22,8 @@ namespace screen {
 typedef short coord_type;
 
 struct position {
-	coord_type row;
 	coord_type column;
+	coord_type row;
 };
 
 enum class color {
@@ -49,11 +49,13 @@ position get_size();
 bool get_cursor_visible();
 
 void set_cursor_position(const position& pos);
+void set_cursor_position(coord_type column, coord_type row);
 void move_cursor_position(const position& pos);
+void move_cursor_position(coord_type column, coord_type row);
 void set_color(const color& foreground, const color& background);
 void set_foreground_color(const color& foreground);
 void set_background_color(const color& background);
-void get_cursor_visible(bool visibility);
+void get_cursor_visible(bool visible);
 
 void clear_screen();
 void ring_bell();
@@ -71,6 +73,7 @@ namespace details {
 const HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
 
 CONSOLE_SCREEN_BUFFER_INFO get_console_screen_buffer_info();
+position get_cursor_position();
 }
 
 #endif
