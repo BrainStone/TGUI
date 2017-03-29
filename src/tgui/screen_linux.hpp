@@ -8,8 +8,8 @@
 #include "screen_base.hpp"
 
 #include <cstdio>
-#include <cunistd>
 #include <sys/ioctl.h>
+#include <unistd.h>
 
 namespace tgui {
 class screen_linux: public screen_base {
