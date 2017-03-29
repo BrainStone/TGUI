@@ -7,8 +7,14 @@
 
 #include "screen_base.hpp"
 
+#include <cstdio>
+#include <cunistd>
+#include <sys/ioctl.h>
+
 namespace tgui {
 class screen_linux: public screen_base {
+public:
+	virtual position get_size();
 };
 
 typedef screen_linux screen;

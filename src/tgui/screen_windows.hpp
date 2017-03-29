@@ -7,8 +7,12 @@
 
 #include "screen_base.hpp"
 
+#include <windows.h>
+
 namespace tgui {
 class screen_windows: public screen_base {
+public:
+	virtual position get_size();
 };
 
 typedef screen_windows screen;
