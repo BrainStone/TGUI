@@ -48,15 +48,15 @@ ifeq ($(OS), Windows_NT)
 		BIN_NAME := $(BIN_NAME).dll
 	else
 		BIN_NAME := $(BIN_NAME).exe
-    BIN_TYPE := executable
+		BIN_TYPE := executable
 	endif
 else
 	ifeq ($(BIN_TYPE), static_library)
 		BIN_NAME := lib$(BIN_NAME).a
 	else ifeq ($(BIN_TYPE), dynamic_library)
 		BIN_NAME := lib$(BIN_NAME).so
-  else
-    BIN_TYPE := executable
+	else
+		BIN_TYPE := executable
 	endif
 endif
 
@@ -82,7 +82,7 @@ ifneq ($(LIBS),)
 endif
 
 # Verbose option, to output compile and link commands
-export V := false
+export V := true
 export CMD_PREFIX := @
 ifeq ($(V),true)
 	CMD_PREFIX :=
