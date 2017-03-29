@@ -226,7 +226,7 @@ ifeq ($(BIN_TYPE), executable)
 	@echo "Removing $(DESTDIR)$(INSTALL_PREFIX)/bin/$(BIN_NAME)"
 	@$(RM) $(DESTDIR)$(INSTALL_PREFIX)/bin/$(BIN_NAME)
 else
-	@echo "Removing library  $(DESTDIR)$(INSTALL_PREFIX)/lib/$(BIN_NAME)"
+	@echo "Removing library $(DESTDIR)$(INSTALL_PREFIX)/lib/$(BIN_NAME)"
 	@$(RM) $(DESTDIR)$(INSTALL_PREFIX)/lib/$(BIN_NAME)
 	@echo "Removing headers from $(DESTDIR)$(INSTALL_PREFIX)/include"
 	@(cd $(DESTDIR)$(INSTALL_PREFIX)/include; $(RM) $(HEADERS))
