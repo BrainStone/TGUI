@@ -46,6 +46,7 @@ ifeq ($(OS), Windows_NT)
 		BIN_NAME := $(BIN_NAME).lib
 	else ifeq ($(BIN_TYPE), dynamic_library)
 		BIN_NAME := $(BIN_NAME).dll
+		COMPILE_FLAGS += -fPIC
 	else
 		BIN_NAME := $(BIN_NAME).exe
 		BIN_TYPE := executable
@@ -55,6 +56,7 @@ else
 		BIN_NAME := lib$(BIN_NAME).a
 	else ifeq ($(BIN_TYPE), dynamic_library)
 		BIN_NAME := lib$(BIN_NAME).so
+		COMPILE_FLAGS += -fPIC
 	else
 		BIN_TYPE := executable
 	endif
