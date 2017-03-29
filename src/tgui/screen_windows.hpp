@@ -5,7 +5,7 @@
 
 #ifdef TGUI_WINDOWS
 
-#include "screen_base.hpp"
+#include "screen.hpp"
 
 #include <windows.h>
 

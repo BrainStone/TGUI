@@ -5,7 +5,7 @@
 
 #ifdef TGUI_LINUX
 
-#include "screen_base.hpp"
+#include "screen.hpp"
 
 #include <cstdio>
 #include <iostream>
