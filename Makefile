@@ -216,7 +216,7 @@ else
 	@echo "Installing library to $(DESTDIR)$(INSTALL_PREFIX)/lib"
 	@$(INSTALL_PROGRAM) $(BIN_PATH)/$(BIN_NAME) $(DESTDIR)$(INSTALL_PREFIX)/lib
 	@echo "Installing headers to $(DESTDIR)$(INSTALL_PREFIX)/include"
-	@(cd $(SRC_PATH); $(INSTALL_DATA) $(HEADERS) $(DESTDIR)$(INSTALL_PREFIX)/include)
+	@(cd $(SRC_PATH); for header in $(HEADERS); do dir="$(DESTDIR)$(INSTALL_PREFIX)/include/$$(dirname "$$header")"; mkdir -p "$$dir"; $(INSTALL_DATA) "$$header" "$$dir";done)
 endif
 
 # Uninstalls the program
