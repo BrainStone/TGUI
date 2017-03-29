@@ -77,3 +77,11 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+
+# Eclipse
+# =========================
+
+.cproject
+.project
+.settings
