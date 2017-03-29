@@ -46,7 +46,6 @@ enum class color {
 };
 
 position get_size();
-position get_cursor_position();
 bool get_cursor_visible();
 
 void set_cursor_position(const position& pos);

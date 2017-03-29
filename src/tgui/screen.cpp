@@ -20,20 +20,6 @@ position get_size() {
 	return size;
 }
 
-position get_cursor_position() {
-	position size;
-
-	std::cout << details::csi << "6n" << std::flush;
-
-	std::cin.ignore(2);
-	std::cin >> size.row;
-	std::cin.ignore(1);
-	std::cin >> size.column;
-	std::cin.ignore(1);
-
-	return size;
-}
-
 void set_cursor_position(const position& pos) {
 	std::cout << details::csi << pos.row << ';' << pos.column << 'H';
 }
@@ -56,16 +42,6 @@ position get_size() {
 
 	size.row = csbi.dwMaximumWindowSize.X;
 	size.column = csbi.dwMaximumWindowSize.X;
-
-	return size;
-}
-
-position get_cursor_position() {
-	CONSOLE_SCREEN_BUFFER_INFO csbi = details::get_console_screen_buffer_info();
-	position size;
-
-	size.row = csbi.dwCursorPosition.X;
-	size.column = csbi.dwCursorPosition.Y;
 
 	return size;
 }
