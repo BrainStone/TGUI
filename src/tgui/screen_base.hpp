@@ -5,7 +5,6 @@
 
 namespace tgui {
 class screen_base {
-	;
 };
 }
 

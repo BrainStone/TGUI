@@ -9,10 +9,9 @@
 
 namespace tgui {
 class screen_linux: public screen_base {
-	;
 };
 
-typename screen_linux screen;
+typedef screen_linux screen;
 }
 
 #endif // #ifdef TGUI_LINUX

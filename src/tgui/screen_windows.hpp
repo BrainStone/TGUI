@@ -8,11 +8,10 @@
 #include "screen_base.hpp"
 
 namespace tgui {
-	class screen_windows: public screen_base {
-		;
-	};
+class screen_windows: public screen_base {
+};
 
-	typename screen_windows screen;
+typedef screen_windows screen;
 }
 
 #endif // #ifdef TGUI_WINDOWS
