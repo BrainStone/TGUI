@@ -55,15 +55,15 @@ namespace tgui {
 		}
 
 		void set_foreground_color(const color& foreground) {
-			int intensity = (foreground & 8)? 1 : 22;
-			int color = (foreground & 7) + 30;
+			int intensity = (static_cast<int>(foreground) & 8)? 1 : 22;
+			int color = (static_cast<int>(foreground) & 7) + 30;
 
 			std::cout << details::csi << intensity << ';' << color << 'm';
 		}
 
 		void set_background_color(const color& background) {
-			int intensity = (background & 8)? 1 : 22;
-			int color = (background & 7) + 40;
+			int intensity = (static_cast<int>(background) & 8)? 1 : 22;
+			int color = (static_cast<int>(background) & 7) + 40;
 
 			std::cout << details::csi << intensity << ';' << color << 'm';
 		}
