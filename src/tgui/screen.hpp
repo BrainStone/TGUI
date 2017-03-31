@@ -45,7 +45,6 @@ namespace tgui {
 		void set_cursor_visible ( bool visible );
 
 		void clear_screen ();
-		void flash_screen ();
 		void ring_bell ();
 		void flush_screen ();
 
