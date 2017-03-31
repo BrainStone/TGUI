@@ -68,6 +68,10 @@ namespace tgui {
 			std::cout << details::csi << intensity << ';' << color << 'm';
 		}
 
+		void set_cursor_visible ( bool visible ) {
+			std::cout << details::csi << "?25" << (visible? 'h' : 'l');
+		}
+
 #elif defined(TGUI_WINDOWS)
 
 		// Details
@@ -122,6 +126,15 @@ namespace tgui {
 
 		void set_background_color ( const color& background ) {
 			SetConsoleTextAttribute( details::hStdout, (details::get_console_screen_buffer_info().wAttributes & 0x0f) | details::background_colors.at( background ) );
+		}
+
+		void set_cursor_visible ( bool visible ) {
+			CONSOLE_CURSOR_INFO lpCursor;
+			GetConsoleCursorInfo( details::hStdout, &lpCursor );
+
+			lpCursor.bVisible = visible;
+
+			SetConsoleCursorInfo( details::hStdout, &lpCursor );
 		}
 
 #endif
