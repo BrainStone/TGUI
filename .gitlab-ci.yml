@@ -1,0 +1,28 @@
+stages:
+- debug
+- release
+- clean
+  
+debug:
+  stage: debug
+  script:
+  - make debug
+  when: on_success
+  except:
+  - tags
+  
+release:
+  stage: release
+  script:
+  - make release
+  when: on_success
+  except:
+  - tags
+
+clean:
+  stage: clean
+  script:
+  - make clean
+  when: always
+  except:
+  - tags
