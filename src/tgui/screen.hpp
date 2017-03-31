@@ -3,10 +3,11 @@
 
 #include "config.hpp"
 
+#include <iostream>
+
 #if defined(TGUI_LINUX)
 
 #include <cstdio>
-#include <iostream>
 #include <string>
 #include <sys/ioctl.h>
 #include <unistd.h>
@@ -55,11 +56,12 @@ void move_cursor_position(coord_type column, coord_type row);
 void set_color(const color& foreground, const color& background);
 void set_foreground_color(const color& foreground);
 void set_background_color(const color& background);
-void get_cursor_visible(bool visible);
+void set_cursor_visible(bool visible);
 
 void clear_screen();
-void ring_bell();
 void flash_screen();
+void ring_bell();
+void flush_screen();
 
 #if defined(TGUI_LINUX)
 

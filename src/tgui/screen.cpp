@@ -96,5 +96,13 @@ void move_cursor_position(const position& pos) {
 
 #endif
 
+void ring_bell() {
+	std::cout << '\a';
+}
+
+void flush_screen() {
+	std::cout.flush();
+}
+
 }
 }
