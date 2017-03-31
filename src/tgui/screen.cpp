@@ -50,6 +50,25 @@ void move_cursor_position(const position& pos) {
 	}
 }
 
+void set_color(const color& foreground, const color& background) {
+	set_background_color(background);
+	set_foreground_color(foreground);
+}
+
+void set_foreground_color(const color& foreground) {
+	int intensity = (foreground & 8)? 1 : 22;
+	int color = (foreground & 7) + 30;
+
+	std::cout << details::csi << intensity << ';' << color << 'm';
+}
+
+void set_background_color(const color& background) {
+	int intensity = (background & 8)? 1 : 22;
+	int color = (background & 7) + 40;
+
+	std::cout << details::csi << intensity << ';' << color << 'm';
+}
+
 #elif defined(TGUI_WINDOWS)
 
 // Details
@@ -92,6 +111,24 @@ void move_cursor_position(const position& pos) {
 	position cur_pos = details::get_cursor_position();
 
 	set_cursor_position(cur_pos.row + pos.row, cur_pos.column + pos.column);
+}
+
+void set_color(const color& foreground, const color& background) {
+	SetConsoleTextAttribute(details::hStdout,
+			details::foreground_colors.at(foreground)
+					| details::background_colors.at(background));
+}
+
+void set_foreground_color(const color& foreground) {
+	SetConsoleTextAttribute(details::hStdout,
+			(details::get_console_screen_buffer_info().wAttributes & 0xf0)
+					| details::foreground_colors.at(foreground));
+}
+
+void set_background_color(const color& background) {
+	SetConsoleTextAttribute(details::hStdout,
+			(details::get_console_screen_buffer_info().wAttributes & 0x0f)
+					| details::background_colors.at(background));
 }
 
 #endif
