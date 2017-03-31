@@ -72,6 +72,10 @@ namespace tgui {
 			std::cout << details::csi << "?25" << (visible? 'h' : 'l');
 		}
 
+		void clear_screen () {
+			std::cout << details::csi << "2J";
+		}
+
 #elif defined(TGUI_WINDOWS)
 
 		// Details
@@ -98,8 +102,8 @@ namespace tgui {
 			CONSOLE_SCREEN_BUFFER_INFO csbi = details::get_console_screen_buffer_info();
 			position size;
 
-			size.column = csbi.dwMaximumWindowSize.X;
-			size.row = csbi.dwMaximumWindowSize.Y;
+			size.column = csbi.dwSize.X;
+			size.row = csbi.dwSize.Y;
 
 			return size;
 		}
@@ -135,6 +139,30 @@ namespace tgui {
 			lpCursor.bVisible = visible;
 
 			SetConsoleCursorInfo( details::hStdout, &lpCursor );
+		}
+
+		void clear_screen () {
+			COORD coordScreen = { 0, 0 };
+
+			DWORD cCharsWritten;
+			CONSOLE_SCREEN_BUFFER_INFO csbi;
+			DWORD dwConSize;
+
+			// get the number of character cells in the current buffer
+			GetConsoleScreenBufferInfo( details::hStdout, &csbi );
+			dwConSize = csbi.dwSize.X * csbi.dwSize.Y;
+
+			// fill the entire screen with blanks
+			FillConsoleOutputCharacter( details::hStdout, (TCHAR) ' ', dwConSize, coordScreen, &cCharsWritten );
+
+			// get the current text attribute
+			GetConsoleScreenBufferInfo( details::hStdout, &csbi );
+
+			// now set the buffer's attributes accordingly
+			FillConsoleOutputAttribute( details::hStdout, csbi.wAttributes, dwConSize, coordScreen, &cCharsWritten );
+
+			// put the cursor at (0, 0)
+			SetConsoleCursorPosition( details::hStdout, coordScreen );
 		}
 
 #endif
