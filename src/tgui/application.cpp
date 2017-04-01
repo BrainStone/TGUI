@@ -1,7 +1,7 @@
 #include "application.hpp"
 
 namespace tgui {
-	void application::on_screen_resize(screen::position new_size) {
+	void application::on_screen_resize ( screen::position new_size ) {
 		;
 	}
 

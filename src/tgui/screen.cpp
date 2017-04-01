@@ -126,7 +126,7 @@ namespace tgui {
 		}
 
 		void set_cursor_position ( const position& pos ) {
-			COORD cursor( {pos.row, pos.column});
+			COORD cursor( { pos.row, pos.column } );
 
 			SetConsoleCursorPosition( details::hStdout, cursor );
 		}
@@ -159,7 +159,7 @@ namespace tgui {
 		}
 
 		void clear_screen () {
-			COORD coordScreen = {0, 0};
+			COORD coordScreen = { 0, 0 };
 
 			DWORD cCharsWritten;
 			CONSOLE_SCREEN_BUFFER_INFO csbi;

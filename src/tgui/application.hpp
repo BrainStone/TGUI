@@ -11,10 +11,10 @@ namespace tgui {
 	private:
 		const bool auto_rerender;
 
-		void on_screen_resize(screen::position new_size);
+		void on_screen_resize ( screen::position new_size );
 
 	public:
-		application(bool auto_rerender = true);
+		application ( bool auto_rerender = true );
 	};
 }
 
