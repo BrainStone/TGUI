@@ -5,6 +5,7 @@
 
 #include <functional>
 #include <iostream>
+#include <list>
 
 #if defined(TGUI_LINUX)
 
@@ -23,7 +24,10 @@
 
 namespace tgui {
 	namespace screen {
+		struct position;
+
 		typedef short coord_type;
+		typedef std::function<void ( position )> resize_callback;
 
 		struct position {
 			coord_type column;
@@ -47,15 +51,18 @@ namespace tgui {
 		void set_cursor_visible ( bool visible );
 
 		void clear_screen ();
-		void register_resize_callback ( std::function<void(position)> callback );
+		void register_resize_callback ( resize_callback callback );
 		void ring_bell ();
 		void flush_screen ();
 
 		namespace details {
+			std::list<resize_callback> resize_callbacks;
 
 #if defined(TGUI_LINUX)
 
 			const std::string csi = "\033[";
+
+			void call_resize_callbacks(int);
 
 #elif defined(TGUI_WINDOWS)
 

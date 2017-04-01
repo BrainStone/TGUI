@@ -13,13 +13,20 @@ namespace tgui {
 #if defined(TGUI_LINUX)
 
 		// Details
+		void details::call_resize_callbacks ( int ) {
+			position size = get_size();
+
+			for ( const resize_callback& callback : resize_callbacks ) {
+				callback( size );
+			}
+		}
 
 		// Actual Implementation
-		position get_size() {
+		position get_size () {
 			winsize w;
 			position size;
 
-			ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+			ioctl( STDOUT_FILENO, TIOCGWINSZ, &w );
 
 			size.column = w.ws_col;
 			size.row = w.ws_row;
@@ -27,43 +34,43 @@ namespace tgui {
 			return size;
 		}
 
-		void set_cursor_position(const position& pos) {
+		void set_cursor_position ( const position& pos ) {
 			std::cout << details::csi << pos.row << ';' << pos.column << 'H';
 		}
 
-		void move_cursor_position(const position& pos) {
+		void move_cursor_position ( const position& pos ) {
 			std::cout << details::csi;
 
-			if(pos.column < 0) {
+			if ( pos.column < 0 ) {
 				std::cout << pos.column << 'D';
-			} else if(pos.column > 0) {
+			} else if ( pos.column > 0 ) {
 				std::cout << pos.column << 'C';
 			}
 
 			std::cout << details::csi;
 
-			if(pos.row < 0) {
+			if ( pos.row < 0 ) {
 				std::cout << pos.row << 'A';
-			} else if(pos.row > 0) {
+			} else if ( pos.row > 0 ) {
 				std::cout << pos.row << 'B';
 			}
 		}
 
-		void set_color(const color& foreground, const color& background) {
-			set_background_color(background);
-			set_foreground_color(foreground);
+		void set_color ( const color& foreground, const color& background ) {
+			set_background_color( background );
+			set_foreground_color( foreground );
 		}
 
-		void set_foreground_color(const color& foreground) {
-			int intensity = (static_cast<int>(foreground) & 8)? 1 : 22;
-			int color = (static_cast<int>(foreground) & 7) + 30;
+		void set_foreground_color ( const color& foreground ) {
+			int intensity = (static_cast<int>( foreground ) & 8)? 1 : 22;
+			int color = (static_cast<int>( foreground ) & 7) + 30;
 
 			std::cout << details::csi << intensity << ';' << color << 'm';
 		}
 
-		void set_background_color(const color& background) {
-			int intensity = (static_cast<int>(background) & 8)? 1 : 22;
-			int color = (static_cast<int>(background) & 7) + 40;
+		void set_background_color ( const color& background ) {
+			int intensity = (static_cast<int>( background ) & 8)? 1 : 22;
+			int color = (static_cast<int>( background ) & 7) + 40;
 
 			std::cout << details::csi << intensity << ';' << color << 'm';
 		}
@@ -76,8 +83,12 @@ namespace tgui {
 			std::cout << details::csi << "2J";
 		}
 
-		void register_resize_callback ( std::function<void(position)> callback ) {
-			std::signal(SIGWINCH, std::function<void(int)>([&callback](int) {callback(get_size());}));
+		void register_resize_callback ( std::function<void ( position )> callback ) {
+			if ( resize_callbacks.empty() ) {
+				std::signal( SIGWINCH, call_resize_callbacks );
+			}
+
+			resize_callbacks.push_back( callback );
 		}
 
 #elif defined(TGUI_WINDOWS)
@@ -113,7 +124,7 @@ namespace tgui {
 		}
 
 		void set_cursor_position ( const position& pos ) {
-			COORD cursor( { pos.row, pos.column } );
+			COORD cursor( {pos.row, pos.column});
 
 			SetConsoleCursorPosition( details::hStdout, cursor );
 		}
@@ -146,7 +157,7 @@ namespace tgui {
 		}
 
 		void clear_screen () {
-			COORD coordScreen = { 0, 0 };
+			COORD coordScreen = {0, 0};
 
 			DWORD cCharsWritten;
 			CONSOLE_SCREEN_BUFFER_INFO csbi;
