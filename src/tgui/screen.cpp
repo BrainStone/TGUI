@@ -77,7 +77,7 @@ namespace tgui {
 		}
 
 		void register_resize_callback ( std::function<void(position)> callback ) {
-			std::signal(SIGWINCH, [](int signal) {callback(get_size());});
+			std::signal(SIGWINCH, [&callback](int) {callback(get_size());});
 		}
 
 #elif defined(TGUI_WINDOWS)
