@@ -7,6 +7,7 @@ debug:
   stage: debug
   script:
   - make debug
+  - du -h bin/debug/libtgui.so
   when: on_success
   except:
   - tags
@@ -15,6 +16,7 @@ release:
   stage: release
   script:
   - make release
+  - du -h bin/release/libtgui.so
   when: on_success
   except:
   - tags
