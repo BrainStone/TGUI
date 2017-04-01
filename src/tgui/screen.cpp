@@ -84,11 +84,11 @@ namespace tgui {
 		}
 
 		void register_resize_callback ( std::function<void ( position )> callback ) {
-			if ( resize_callbacks.empty() ) {
-				std::signal( SIGWINCH, call_resize_callbacks );
+			if ( details::resize_callbacks.empty() ) {
+				std::signal( SIGWINCH, details::call_resize_callbacks );
 			}
 
-			resize_callbacks.push_back( callback );
+			details::resize_callbacks.push_back( callback );
 		}
 
 #elif defined(TGUI_WINDOWS)
