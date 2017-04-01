@@ -4,6 +4,7 @@
 #include "config.hpp"
 #include "screen.hpp"
 
+#include <iostream>
 #include <vector>
 
 namespace tgui {
@@ -14,10 +15,22 @@ namespace tgui {
 			wchar_t character;
 			screen::color foreground;
 			screen::color background;
+
+		public:
+			cell ();
+
+			bool operator == ( const cell& rhs ) const;
+			bool operator != ( const cell& rhs ) const;
 		};
 
 	private:
 		std::vector<std::vector<cell>> cells;
+
+	public:
+		void render () const;
+
+		bool operator == ( const screen_buffer& rhs ) const;
+		bool operator != ( const screen_buffer& rhs ) const;
 	};
 }
 
