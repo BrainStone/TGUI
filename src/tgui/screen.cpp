@@ -2,6 +2,8 @@
 
 namespace tgui {
 	namespace screen {
+		std::list<resize_callback> details::resize_callbacks;
+
 		void set_cursor_position ( coord_type column, coord_type row ) {
 			set_cursor_position( { column, row } );
 		}

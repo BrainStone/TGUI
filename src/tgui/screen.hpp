@@ -56,7 +56,7 @@ namespace tgui {
 		void flush_screen ();
 
 		namespace details {
-			std::list<resize_callback> resize_callbacks;
+			extern std::list<resize_callback> resize_callbacks;
 
 #if defined(TGUI_LINUX)
 
