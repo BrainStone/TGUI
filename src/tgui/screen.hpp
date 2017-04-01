@@ -3,10 +3,12 @@
 
 #include "config.hpp"
 
+#include <functional>
 #include <iostream>
 
 #if defined(TGUI_LINUX)
 
+#include <csignal>
 #include <cstdio>
 #include <string>
 #include <sys/ioctl.h>
@@ -45,6 +47,7 @@ namespace tgui {
 		void set_cursor_visible ( bool visible );
 
 		void clear_screen ();
+		void register_resize_callback ( std::function<void(position)> callback );
 		void ring_bell ();
 		void flush_screen ();
 

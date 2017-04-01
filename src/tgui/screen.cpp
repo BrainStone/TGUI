@@ -76,6 +76,10 @@ namespace tgui {
 			std::cout << details::csi << "2J";
 		}
 
+		void register_resize_callback ( std::function<void(position)> callback ) {
+			std::signal(SIGWINCH, [](int signal) {callback(get_size());});
+		}
+
 #elif defined(TGUI_WINDOWS)
 
 		// Details
@@ -163,6 +167,11 @@ namespace tgui {
 
 			// put the cursor at (0, 0)
 			SetConsoleCursorPosition( details::hStdout, coordScreen );
+		}
+
+		void register_resize_callback ( std::function<void ( position )> callback ) {
+			// ????
+			// callback(get_size())
 		}
 
 #endif
