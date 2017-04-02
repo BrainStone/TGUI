@@ -280,14 +280,16 @@ $(BUILD_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
 	@echo -en "\t Compile time: "
 	@$(END_TIME)
 
+# Generate Doxygen documentation
 .PHONY: doc
 doc:
 	@${RM} TGUI-doc.*
 	@doxygen doc/Doxyfile
+  @(cd doc/gen/html; zip -r ../../../TGUI-doc.zip *)
 	@(cd doc/gen/latex; make)
 	@cp doc/gen/latex/refman.pdf TGUI-doc.pdf
-	@(cd doc/gen/html; zip -r ../../../TGUI-doc.zip *)
 
+# Clear Doxygen documentation 
 .PHONY: cleandoc
 cleandoc:
 	@${RM} -r doc/gen TGUI-doc.*
