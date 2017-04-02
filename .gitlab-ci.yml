@@ -1,6 +1,7 @@
 stages:
 - debug
 - release
+- doc
 - clean
   
 debug:
@@ -18,6 +19,17 @@ release:
   - make release
   - du -h bin/release/libtgui.so
   when: on_success
+  except:
+  - tags
+
+doc:
+  stage: doc
+  script:
+  - make doc 
+  when: on_success
+  artifacts:
+    paths:
+    - TGUI-doc.*
   except:
   - tags
 

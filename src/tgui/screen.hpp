@@ -34,6 +34,11 @@ namespace tgui {
 			coord_type row;
 		};
 
+		/**
+		 * @brief All available colors
+		 *
+		 * This enum contains all color available for display. They can be applied for the foreground as well as the background!
+		 */
 		enum class color {
 			BLACK, DARK_RED, DARK_GREEN, DARK_YELLOW, DARK_BLUE, DARK_MAGENTA, DARK_CYAN, GRAY, DARK_GRAY, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE
 		};

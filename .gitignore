@@ -28,6 +28,10 @@
 *.out
 *.app
 
+# Doxygen
+doc/gen
+TGUI-doc.*
+
 # =========================
 # Operating System Files
 # =========================
