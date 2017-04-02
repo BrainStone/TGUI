@@ -5,6 +5,8 @@ BIN_TYPE = dynamic_library
 # The name of the executable to be created
 # The extension gets appended automatically based on the type
 BIN_NAME := tgui
+# The name of the documentation file
+DOC_NAME := TGUI-doc
 # Compiler used
 CXX ?= g++
 # Extension of source files used in the project
@@ -281,15 +283,23 @@ $(BUILD_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
 	@$(END_TIME)
 
 # Generate Doxygen documentation
+# Doesn't exits if doxygen or the Doxyfile doesn't exist
+ifneq ("$(wildcard doc/Doxyfile)", "")
+ifneq ("$(shell which doxygen)", "")
 .PHONY: doc
 doc:
 	@${RM} TGUI-doc.*
 	@doxygen doc/Doxyfile
-	@(cd doc/gen/html; zip -r9 ../../../TGUI-doc.zip *)
+	@(cd doc/gen/html; zip -r9 ../../../"$(DOC_NAME).zip" *)
+ifneq ("$(shell which pdflatex)", "")
 	@(cd doc/gen/latex; make)
-	@cp doc/gen/latex/refman.pdf TGUI-doc.pdf
+	@cp doc/gen/latex/refman.pdf "$(DOC_NAME).pdf"
+endif
 
 # Clear Doxygen documentation 
 .PHONY: cleandoc
 cleandoc:
-	@${RM} -r doc/gen TGUI-doc.*
+	@echo "Deleting: $(DOC_NAME).*"
+	@${RM} -r doc/gen "$(DOC_NAME).*"
+endif
+endif
