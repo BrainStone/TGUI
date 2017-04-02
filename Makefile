@@ -285,7 +285,7 @@ $(BUILD_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
 doc:
 	@${RM} TGUI-doc.*
 	@doxygen doc/Doxyfile
-  @(cd doc/gen/html; zip -r ../../../TGUI-doc.zip *)
+	@(cd doc/gen/html; zip -r ../../../TGUI-doc.zip *)
 	@(cd doc/gen/latex; make)
 	@cp doc/gen/latex/refman.pdf TGUI-doc.pdf
 
