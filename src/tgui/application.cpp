@@ -31,9 +31,9 @@ namespace tgui {
 	}
 
 	application::application ( int fps, bool auto_rerender ) :
-			fps { fps }, auto_rerender { auto_rerender }, run_render_loop { true }, render_thread { application::render_loop, this } {
+			fps { fps }, auto_rerender { auto_rerender }, run_render_loop { true }, render_thread { &application::render_loop, this } {
 		if ( auto_rerender ) {
-			screen::register_resize_callback( std::bind( application::on_screen_resize, this, std::placeholders::_1 ) );
+			screen::register_resize_callback( std::bind( &application::on_screen_resize, this, std::placeholders::_1 ) );
 		}
 	}
 
