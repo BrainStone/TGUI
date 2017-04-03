@@ -183,8 +183,20 @@ namespace tgui {
 		}
 
 		void register_resize_callback ( std::function<void ( position )> callback ) {
-			// ????
-			// callback(get_size())
+			if ( details::resize_callbacks.empty() ) {
+				new std::thread( [] {
+					INPUT_RECORD event;
+					DWORD num_events;
+
+					while(true) {
+						ReadConsoleInput(details::hStdout, &event, 1, &num_events);
+
+						// TODO find resize event
+					}
+				} );
+			}
+
+			details::resize_callbacks.push_back( callback );
 		}
 
 #endif

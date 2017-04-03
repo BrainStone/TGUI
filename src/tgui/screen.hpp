@@ -18,6 +18,7 @@
 #elif defined(TGUI_WINDOWS)
 
 #include <map>
+#include <thread>
 #include <windows.h>
 
 #endif
