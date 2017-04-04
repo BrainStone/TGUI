@@ -39,7 +39,7 @@ namespace tgui {
 		 * @brief All available colors
 		 *
 		 * This enum contains all color available for display. They can be applied for the foreground as well as the background!\n
-		 * *Colors may vary depending on the used environment!!! See https://en.wikipedia.org/wiki/ANSI_escape_code#Colors for more details
+		 * *Colors may vary depending on the used environment!!! See https://en.wikipedia.org/wiki/ANSI_escape_code#Colors for more details*
 		 */
 		enum class color {
 			/// #000000
@@ -77,7 +77,6 @@ namespace tgui {
 		};
 
 		position get_size ();
-		bool get_cursor_visible ();
 
 		void set_cursor_position ( const position& pos );
 		void set_cursor_position ( coord_type column, coord_type row );
