@@ -12,8 +12,11 @@ namespace tgui {
 	}
 
 	void application::render_loop () {
-		std::chrono::steady_clock::duration time_step = std::chrono::duration_cast<std::chrono::steady_clock::duration>( std::chrono::seconds( 1 ) ) / fps;
-		std::chrono::steady_clock::time_point next_frame = std::chrono::steady_clock::now();
+		using namespace std::chrono;
+
+		steady_clock::duration time_step = duration_cast<steady_clock::duration>( seconds( 1 ) ) / fps;
+		steady_clock::time_point next_frame = steady_clock::now();
+		steady_clock::time_point now;
 		std::mutex render_loop_cv_m;
 		std::unique_lock<std::mutex> render_loop_cv_lock( render_loop_cv_m );
 
@@ -21,9 +24,14 @@ namespace tgui {
 			render_objects();
 			render_to_screen();
 
-			next_frame += time_step;
+			now = steady_clock::now();
+
+			do {
+				next_frame += time_step;
+			} while ( next_frame > now );
+
 			render_loop_cv.wait_until( render_loop_cv_lock, next_frame, [this, &next_frame] {
-				return (std::chrono::steady_clock::now() >= next_frame) || !run_render_loop;
+				return (steady_clock::now() >= next_frame) || !run_render_loop;
 			} );
 		}
 	}
