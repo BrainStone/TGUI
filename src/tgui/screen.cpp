@@ -1,3 +1,9 @@
+/**
+ * @file tgui/screen.cpp
+ *
+ * @brief This file contains the implementations of the tgui::screen methods.
+ */
+
 #include "screen.hpp"
 
 namespace tgui {

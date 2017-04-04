@@ -10,8 +10,6 @@
 #endif
 
 /**
- * @define TGUI_UNUSED
- *
  * A macro used for silencing unused parameter/variable warnings in release builds
  */
 #if !defined(__DEBUG__) && defined(__NDEBUG__)

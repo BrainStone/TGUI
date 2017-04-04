@@ -1,6 +1,12 @@
 #ifndef TGUI_TGUI_SCREEN_HPP
 #define TGUI_TGUI_SCREEN_HPP
 
+/**
+ * @file tgui/screen.hpp
+ *
+ * @brief This file contains the tgui::screen methods.
+ */
+
 #include "config.hpp"
 
 #include <functional>

@@ -16,6 +16,17 @@ Here are the features:
 - Minimal console output. (Only changed parts of the console will get printed)
 - Customizable
 
+## Installing
+
+To install simply run the following commands
+
+    git clone https://github.com/BrainStone/TGUI
+    cd TGUI
+    make
+    sudo make install
+
+Of course make sure you have `sudo`, `g++`, `make` and `git` installed.
+
 ## Legal Stuff
 
 ### Copyright

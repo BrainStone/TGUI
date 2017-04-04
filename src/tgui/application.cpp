@@ -1,3 +1,9 @@
+/**
+ * @file tgui/application.cpp
+ *
+ * @brief This file contains the implementations of the tgui::application class.
+ */
+
 #include "application.hpp"
 
 namespace tgui {
@@ -31,7 +37,8 @@ namespace tgui {
 	}
 
 	application::application ( int fps, bool auto_rerender ) :
-			fps { fps }, auto_rerender { auto_rerender }, run_render_loop { true }, render_thread { &application::render_loop, this } {
+			fps { fps }, auto_rerender { auto_rerender }, run_render_loop { true }, render_thread { &application::render_loop, this }, old_buffer { new screen_buffer() }, new_buffer {
+					new screen_buffer() } {
 		if ( auto_rerender ) {
 			screen::register_resize_callback( std::bind( &application::on_screen_resize, this, std::placeholders::_1 ) );
 		}

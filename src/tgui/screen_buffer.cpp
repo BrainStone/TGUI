@@ -14,7 +14,7 @@ namespace tgui {
 	}
 
 	void screen_buffer::render () const {
-		// TODO!
+		// TODO render
 	}
 
 	bool screen_buffer::operator == ( const screen_buffer& rhs ) const {

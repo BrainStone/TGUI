@@ -11,7 +11,7 @@ namespace tgui {
 	class screen_buffer {
 	public:
 		class cell {
-		private:
+		protected:
 			wchar_t character;
 			screen::color foreground;
 			screen::color background;
@@ -19,18 +19,20 @@ namespace tgui {
 		public:
 			cell ();
 
-			bool operator == ( const cell& rhs ) const;
-			bool operator != ( const cell& rhs ) const;
+			virtual bool operator == ( const cell& rhs ) const;
+			virtual bool operator != ( const cell& rhs ) const;
 		};
 
-	private:
+	protected:
 		std::vector<std::vector<cell>> cells;
 
 	public:
-		void render () const;
+		virtual ~screen_buffer () = default;
 
-		bool operator == ( const screen_buffer& rhs ) const;
-		bool operator != ( const screen_buffer& rhs ) const;
+		virtual void render () const;
+
+		virtual bool operator == ( const screen_buffer& rhs ) const;
+		virtual bool operator != ( const screen_buffer& rhs ) const;
 	};
 }
 
