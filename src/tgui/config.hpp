@@ -35,8 +35,8 @@ namespace tgui {
 	 */
 	namespace screen {
 		/**
-		 * This namespace contains platform specific implementations.<br />
-		 * <b>It is not recommended to use any methods inside this namespace!</b>
+		 * This namespace contains platform specific implementations.\n
+		 * **It is not recommended to use any methods inside this namespace!**
 		 */
 		namespace details {
 		}

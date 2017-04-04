@@ -38,10 +38,42 @@ namespace tgui {
 		/**
 		 * @brief All available colors
 		 *
-		 * This enum contains all color available for display. They can be applied for the foreground as well as the background!
+		 * This enum contains all color available for display. They can be applied for the foreground as well as the background!\n
+		 * *Colors may vary depending on the used environment!!! See https://en.wikipedia.org/wiki/ANSI_escape_code#Colors for more details
 		 */
 		enum class color {
-			BLACK, DARK_RED, DARK_GREEN, DARK_YELLOW, DARK_BLUE, DARK_MAGENTA, DARK_CYAN, GRAY, DARK_GRAY, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE
+			/// #000000
+			BLACK,
+			/// #800000
+			DARK_RED,
+			/// #008000
+			DARK_GREEN,
+			/// #808000
+			DARK_YELLOW,
+			/// #000080
+			DARK_BLUE,
+			/// #800080
+			DARK_MAGENTA,
+			/// #008080
+			DARK_CYAN,
+			/// #C0C0C0
+			GRAY,
+			/// #808080
+			DARK_GRAY,
+			/// #FF0000
+			RED,
+			/// #00FF00
+			GREEN,
+			/// #FFFF00
+			YELLOW,
+			/// #0000FF
+			BLUE,
+			/// #FF00FF
+			MAGENTA,
+			/// #00FFFF
+			CYAN,
+			/// #FFFFFF
+			WHITE
 		};
 
 		position get_size ();
