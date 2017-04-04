@@ -144,15 +144,20 @@ namespace tgui {
 		}
 
 		void set_color ( const color& foreground, const color& background ) {
-			SetConsoleTextAttribute( details::hStdout, details::foreground_colors.at( foreground ) | details::background_colors.at( background ) );
+			SetConsoleTextAttribute( details::hStdout,
+					details::foreground_colors.at( foreground ) | details::background_colors.at( background ) );
 		}
 
 		void set_foreground_color ( const color& foreground ) {
-			SetConsoleTextAttribute( details::hStdout, (details::get_console_screen_buffer_info().wAttributes & 0xf0) | details::foreground_colors.at( foreground ) );
+			SetConsoleTextAttribute( details::hStdout,
+					(details::get_console_screen_buffer_info().wAttributes & 0xf0)
+							| details::foreground_colors.at( foreground ) );
 		}
 
 		void set_background_color ( const color& background ) {
-			SetConsoleTextAttribute( details::hStdout, (details::get_console_screen_buffer_info().wAttributes & 0x0f) | details::background_colors.at( background ) );
+			SetConsoleTextAttribute( details::hStdout,
+					(details::get_console_screen_buffer_info().wAttributes & 0x0f)
+							| details::background_colors.at( background ) );
 		}
 
 		void set_cursor_visible ( bool visible ) {
