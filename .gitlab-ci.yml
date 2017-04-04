@@ -36,6 +36,7 @@ doc:
 clean:
   stage: clean
   script:
+  - make cleandoc
   - make clean
   when: always
   except:
