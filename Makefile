@@ -288,7 +288,7 @@ ifneq ("$(wildcard doc/Doxyfile)", "")
 ifneq ("$(shell which doxygen)", "")
 .PHONY: doc
 doc:
-	@${RM} TGUI-doc.*
+	@${RM} "$(DOC_NAME).*"
 	@doxygen doc/Doxyfile
 	@(cd doc/gen/html; zip -r9 ../../../"$(DOC_NAME).zip" *)
 ifneq ("$(shell which pdflatex)", "")
