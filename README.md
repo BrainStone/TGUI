@@ -27,6 +27,10 @@ To install simply run the following commands
 
 Of course make sure you have `sudo`, `g++`, `make` and `git` installed.
 
+## Documentation
+
+The full documentation can be found at https://doc.brainstonemod.com/TGUI/
+
 ## Legal Stuff
 
 ### Copyright
