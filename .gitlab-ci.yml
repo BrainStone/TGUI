@@ -24,7 +24,9 @@ release:
 doc:
   stage: doc
   script:
-  - make doc 
+  - make doc
+  - rm -r /var/www/doc/TGUI/*
+  - cp -r doc/gen/html/* /var/www/doc/TGUI 
   when: on_success
   artifacts:
     paths:
