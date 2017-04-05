@@ -1,4 +1,4 @@
-<center>![Logo](logo.png)</center>
+<p align="center">![Logo](logo.png)</p>
 
 # Text-GUI-Library - A C++11 alternative for ncurses
 
