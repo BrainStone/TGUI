@@ -1,6 +1,4 @@
-||
-|:--:|
-| ![Logo](logo.png) |
+<center>![Logo](logo.png)</center>
 
 # Text-GUI-Library - A C++11 alternative for ncurses
 
