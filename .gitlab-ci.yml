@@ -1,11 +1,10 @@
 stages:
-- debug
-- release
+- build
 - doc
 - clean
   
 debug:
-  stage: debug
+  stage: build
   script:
   - make debug
   - du -h bin/debug/libtgui.so
@@ -14,7 +13,7 @@ debug:
   - tags
   
 release:
-  stage: release
+  stage: build
   script:
   - make release
   - du -h bin/release/libtgui.so
