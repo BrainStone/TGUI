@@ -112,10 +112,7 @@ namespace tgui {
 
 		position details::get_cursor_position () {
 			CONSOLE_SCREEN_BUFFER_INFO csbi = details::get_console_screen_buffer_info();
-			position size;
-
-			size.column = csbi.dwCursorPosition.X;
-			size.row = csbi.dwCursorPosition.Y;
+			position size { csbi.dwCursorPosition.X, csbi.dwCursorPosition.Y };
 
 			return size;
 		}
@@ -123,10 +120,7 @@ namespace tgui {
 		// Actual Implementation
 		position get_size () {
 			CONSOLE_SCREEN_BUFFER_INFO csbi = details::get_console_screen_buffer_info();
-			position size;
-
-			size.column = csbi.dwSize.X;
-			size.row = csbi.dwSize.Y;
+			position size { csbi.dwSize.X, csbi.dwSize.Y };
 
 			return size;
 		}
@@ -195,16 +189,23 @@ namespace tgui {
 
 		void register_resize_callback ( std::function<void ( position )> callback ) {
 			if ( details::resize_callbacks.empty() ) {
-				new std::thread( [] {
-					INPUT_RECORD event;
-					DWORD num_events;
+				new std::thread(
+						[] {
+							INPUT_RECORD event;
+							DWORD num_events;
 
-					while(true) {
-						ReadConsoleInput(details::hStdout, &event, 1, &num_events);
+							while(true) {
+								ReadConsoleInput(details::hStdout, &event, 1, &num_events);
 
-						// TODO find resize event
-					}
-				} );
+								if(event.EventType == WINDOW_BUFFER_SIZE_EVENT) {
+									position size {event.Event.WindowBufferSizeEvent.dwSize.X, event.Event.WindowBufferSizeEvent.dwSize.Y};
+
+									for ( const resize_callback& callback : details::resize_callbacks ) {
+										callback( size );
+									}
+								}
+							}
+						} );
 			}
 
 			details::resize_callbacks.push_back( callback );
