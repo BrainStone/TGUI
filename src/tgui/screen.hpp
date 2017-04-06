@@ -54,6 +54,7 @@ namespace tgui {
 
 		typedef short coord_type;
 		typedef std::function<void ( position )> resize_callback;
+		typedef position size;
 
 		struct position {
 			coord_type column;

@@ -45,14 +45,14 @@ namespace tgui {
 		std::condition_variable render_loop_cv;
 		std::atomic<bool> run_render_loop;
 		std::thread render_thread;
-		screen::position size;
+		screen::size size;
 		std::shared_ptr<screen_buffer> old_buffer;
 		std::shared_ptr<screen_buffer> new_buffer;
 		std::mutex object_lock;
 		std::mutex render_lock;
 		std::mutex buffer_lock;
 
-		virtual void on_screen_resize ( screen::position new_size );
+		virtual void on_screen_resize ( screen::size new_size );
 		virtual void render_loop ();
 		virtual void render_objects ();
 		virtual void render_to_screen ();

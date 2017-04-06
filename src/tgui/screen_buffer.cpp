@@ -32,7 +32,7 @@ namespace tgui {
 		return !(*this == rhs);
 	}
 
-	screen_buffer::screen_buffer ( const screen::position& size ) :
+	screen_buffer::screen_buffer ( const screen::size& size ) :
 			cells( size.column, std::vector<cell>( size.row ) ), size( size ) {
 	}
 
