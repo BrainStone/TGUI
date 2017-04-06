@@ -31,7 +31,17 @@ Of course make sure you have `sudo`, `g++`, `make` and `git` installed.
 
 ## Documentation
 
-The full documentation can be found at https://doc.brainstonemod.com/TGUI/
+The full documentation can be found at https://doc.brainstonemod.com/TGUI/.<br />
+You can also download the documentation in [HTML](https://doc.brainstonemod.com/TGUI/downloads/TGUI-doc.zip) (zipped) or
+[PDF](https://doc.brainstonemod.com/TGUI/downloads/TGUI-doc.zip) format.
+
+You can also generate the documentation locally. However [`doxygen`](http://www.stack.nl/~dimitri/doxygen/) needs to be
+installed. [`graphviz`](http://www.graphviz.org/) and [`latex`](https://www.latex-project.org/) is not required but
+recommended. To generate the documentation locally run this command:
+
+    make doc
+    
+You will then find a `TGUI-doc.zip` file and if you have `latex` installed a `TGUI-doc.pdf` file in the base directory.
 
 ## Legal Stuff
 

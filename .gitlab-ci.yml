@@ -25,8 +25,10 @@ doc:
   stage: doc
   script:
   - make doc
-  - rm -r /var/www/doc/TGUI/*
-  - cp -r doc/gen/html/* /var/www/doc/TGUI 
+  - rm -r /var/www/doc/TGUI
+  - mkdir -p /var/www/doc/TGUI/downloads
+  - cp -r doc/gen/html/* /var/www/doc/TGUI/
+  - cp TGUI-doc.* /var/www/doc/TGUI/downloads/
   when: on_success
   artifacts:
     paths:
