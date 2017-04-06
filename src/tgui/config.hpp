@@ -20,6 +20,13 @@
 #ifndef TGUI_TGUI_CONFIG_HPP
 #define TGUI_TGUI_CONFIG_HPP
 
+/**
+ * @brief Macro to detect the operating system.
+ *
+ * This is important for deciding which native implementations are used.
+ *
+ * *Note: This might be needed to be expanded in the future.*
+ */
 #ifdef __unix__
 #	define TGUI_LINUX
 #elif defined(_WIN32) || defined(WIN32)
@@ -29,7 +36,7 @@
 #endif
 
 /**
- * A macro used for silencing unused parameter/variable warnings in release builds
+ * @brief A macro used for silencing unused parameter/variable warnings in release builds.
  */
 #if !defined(__DEBUG__) && defined(__NDEBUG__)
 #	if defined(__GNUC__)
@@ -44,15 +51,16 @@
 #endif
 
 /**
- * The namepsace for the TGUI Library. All methods and classes will be located inside this namespace or sub-namespaces.
+ * @brief The namepsace for the TGUI Library. All methods and classes will be located inside this namespace or sub-namespaces.
  */
 namespace tgui {
 	/**
-	 * The namespace for the screen and console utilities. This is the only place where platform dependent code is located.
+	 * @brief The namespace for the screen and console utilities. This is the only place where platform dependent code is located.
 	 */
 	namespace screen {
 		/**
-		 * This namespace contains platform specific implementations.\n
+		 * @brief This namespace contains platform specific implementations.
+		 *
 		 * **It is not recommended to use any methods inside this namespace!**
 		 */
 		namespace details {
