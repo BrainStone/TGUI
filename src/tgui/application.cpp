@@ -27,7 +27,12 @@
 
 namespace tgui {
 	void application::on_screen_resize ( screen::position TGUI_UNUSED(new_size) ) {
-		// TODO on_screen_resize
+		size = screen::get_size();
+
+		old_buffer = std::shared_ptr<screen_buffer>( new screen_buffer( size ) );
+		new_buffer = std::shared_ptr<screen_buffer>( new screen_buffer( size ) );
+
+		render( true );
 	}
 
 	void application::render_loop () {
@@ -40,8 +45,7 @@ namespace tgui {
 		std::unique_lock<std::mutex> render_loop_cv_lock( render_loop_cv_m );
 
 		while ( run_render_loop ) {
-			render_objects();
-			render_to_screen();
+			render();
 
 			now = steady_clock::now();
 
@@ -56,16 +60,35 @@ namespace tgui {
 	}
 
 	void application::render_objects () {
+		std::lock_guard<std::mutex> object_guard( object_lock );
+
 		// TODO render_objects
 	}
 
 	void application::render_to_screen () {
-		// TODO render_to_screen
+		std::lock_guard<std::mutex> render_guard( render_lock );
+
+		new_buffer->render( *old_buffer );
+
+		old_buffer = new_buffer;
+		new_buffer = std::shared_ptr<screen_buffer>( new screen_buffer( size ) );
+	}
+
+	void application::render ( bool clear_screen ) {
+		std::lock_guard<std::mutex> object_guard( buffer_lock );
+
+		render_objects();
+
+		if ( clear_screen )
+			screen::clear_screen();
+
+		render_to_screen();
 	}
 
 	application::application ( int fps, bool auto_rerender ) :
-			fps { fps }, auto_rerender { auto_rerender }, run_render_loop { true }, render_thread {
-					&application::render_loop, this }, old_buffer { new screen_buffer() }, new_buffer { new screen_buffer() } {
+			fps( fps ), auto_rerender( auto_rerender ), run_render_loop( true ), render_thread( &application::render_loop,
+					this ), size( screen::get_size() ), old_buffer( new screen_buffer( size ) ), new_buffer(
+					new screen_buffer( size ) ) {
 		if ( auto_rerender ) {
 			screen::register_resize_callback( std::bind( &application::on_screen_resize, this, std::placeholders::_1 ) );
 		}

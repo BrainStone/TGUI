@@ -32,8 +32,24 @@ namespace tgui {
 		return !(*this == rhs);
 	}
 
-	void screen_buffer::render () const {
-		// TODO render
+	screen_buffer::screen_buffer ( const screen::position& size ) :
+			cells( size.column, std::vector<cell>( size.row ) ), size( size ) {
+	}
+
+	void screen_buffer::render ( const screen_buffer& old_buffer ) const {
+		std::function<bool ( const screen::position& )> cell_changed;
+
+		if ( size == old_buffer.size ) {
+			cell_changed = [this, &old_buffer](const screen::position& pos) {
+				return cells[pos.column][pos.row] != old_buffer.cells[pos.column][pos.row];
+			};
+		} else {
+			cell_changed = [](const screen::position&) {return true;};
+		}
+
+		screen::set_cursor_position( 0, 0 );
+
+		// TODO actual rendering
 	}
 
 	bool screen_buffer::operator == ( const screen_buffer& rhs ) const {

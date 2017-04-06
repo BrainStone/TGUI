@@ -58,6 +58,9 @@ namespace tgui {
 		struct position {
 			coord_type column;
 			coord_type row;
+
+			bool operator == ( const position& rhs ) const;
+			bool operator != ( const position& rhs ) const;
 		};
 
 		/**

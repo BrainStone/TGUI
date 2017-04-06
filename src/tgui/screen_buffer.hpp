@@ -44,11 +44,13 @@ namespace tgui {
 
 	protected:
 		std::vector<std::vector<cell>> cells;
+		screen::position size;
 
 	public:
+		screen_buffer ( const screen::position& size );
 		virtual ~screen_buffer () = default;
 
-		virtual void render () const;
+		virtual void render ( const screen_buffer& old_buffer ) const;
 
 		virtual bool operator == ( const screen_buffer& rhs ) const;
 		virtual bool operator != ( const screen_buffer& rhs ) const;
