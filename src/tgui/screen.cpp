@@ -153,7 +153,7 @@ namespace tgui {
 		}
 
 		void set_cursor_position ( const position& pos ) {
-			COORD cursor( { pos.row, pos.column } );
+			COORD cursor { pos.row, pos.column };
 
 			SetConsoleCursorPosition( details::hStdout, cursor );
 		}

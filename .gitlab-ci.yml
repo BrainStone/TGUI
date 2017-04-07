@@ -3,20 +3,11 @@ stages:
 - doc
 - clean
   
-debug:
+build:
   stage: build
   script:
-  - make debug
-  - du -h bin/debug/libtgui.so
-  when: on_success
-  except:
-  - tags
-  
-release:
-  stage: build
-  script:
-  - make release
-  - du -h bin/release/libtgui.so
+  - ./gradlew build 
+  - du -h build/libs/tgui/*/*/*
   when: on_success
   except:
   - tags
@@ -24,23 +15,22 @@ release:
 doc:
   stage: doc
   script:
-  - make doc
+  - ./gradlew doc
   - rm -r /var/www/doc/TGUI
   - mkdir -p /var/www/doc/TGUI/downloads
-  - cp -r doc/gen/html/* /var/www/doc/TGUI/
-  - cp TGUI-doc.* /var/www/doc/TGUI/downloads/
+  - cp -r build/doc/gen/html/* /var/www/doc/TGUI/
+  - cp /build/doc/TGUI-doc.* /var/www/doc/TGUI/downloads/
   when: on_success
   artifacts:
     paths:
-    - TGUI-doc.*
+    - /build/doc/TGUI-doc.*
   only:
   - master
 
 clean:
   stage: clean
   script:
-  - make cleandoc
-  - make clean
+  - ./gradlew clean
   when: always
   except:
   - tags

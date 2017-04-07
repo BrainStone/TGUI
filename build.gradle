@@ -1,2 +1,84 @@
 apply plugin: "cpp"
 
+model {
+    platforms {
+      	x64 {
+      		  architecture "x86_64"
+      	}
+      	x86 {
+      		  architecture "x86"
+      	}
+    }
+
+    buildTypes {
+        debug
+        release
+    }
+
+    components {
+        tgui(NativeLibrarySpec) {
+            if(System.properties['sun.arch.data.model'] == "64") {
+                targetPlatform "x64"
+            } else {
+                targetPlatform "x86"
+            }
+
+            sources {
+                cpp {
+                    source {
+                        srcDirs "src"
+                        include "**/*.cpp"
+                    }
+                    exportedHeaders {
+                        srcDirs "src"
+                        include "**/*.hpp"
+                    }
+                }
+            }
+
+            binaries.all {
+                if (toolChain in Gcc) {
+                    cppCompiler.args "-Wall"
+                    cppCompiler.args "-Wextra"
+                    cppCompiler.args "-Wpedantic"
+                    cppCompiler.args "-fPIC"
+                }
+                if (toolChain in VisualCpp) {
+                    cppCompiler.args "/W4"
+                    cppCompiler.args "/FS"
+                    cppCompiler.args "/EHsc"
+                }
+
+                if(buildType == buildTypes.debug) {
+                    cppCompiler.define "__DEBUG__"
+
+                    if (toolChain in Gcc) {
+                        cppCompiler.args "-Og"
+                        cppCompiler.args "-g3"
+                    }
+                    if (toolChain in VisualCpp) {
+                        cppCompiler.args "/Od"
+                        cppCompiler.args "/Zi"
+                    }
+                }
+                if(buildType == buildTypes.release) {
+                    cppCompiler.define "__NDEBUG__"
+
+                    if (toolChain in Gcc) {
+                        cppCompiler.args "-O2"
+                        cppCompiler.args "-g0"
+                    }
+                    if (toolChain in VisualCpp) {
+                        cppCompiler.args "/Ox"
+                    }
+                }
+            }
+        }
+    }
+}
+
+task doc {
+    doLast {
+        ;
+    }
+}
