@@ -90,3 +90,9 @@ $RECYCLE.BIN/
 .cproject
 .project
 .settings
+
+# Gradle
+# =========================
+
+.gradle
+
