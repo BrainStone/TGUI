@@ -1,5 +1,4 @@
 stages:
-- clean
 - build
 - doc
 - clean
@@ -7,6 +6,7 @@ stages:
 build:
   stage: build
   script:
+  - ./gradlew clean
   - ./gradlew build 
   - du -h build/libs/tgui/*/*/*
   when: on_success
