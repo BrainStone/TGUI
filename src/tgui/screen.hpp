@@ -71,37 +71,37 @@ namespace tgui {
 		 * *Colors may vary depending on the used environment!!! See https://en.wikipedia.org/wiki/ANSI_escape_code#Colors for more details*
 		 */
 		enum class color {
-			/// #000000
+			/// \#000000
 			BLACK,
-			/// #800000
+			/// \#800000
 			DARK_RED,
-			/// #008000
+			/// \#008000
 			DARK_GREEN,
-			/// #808000
+			/// \#808000
 			DARK_YELLOW,
-			/// #000080
+			/// \#000080
 			DARK_BLUE,
-			/// #800080
+			/// \#800080
 			DARK_MAGENTA,
-			/// #008080
+			/// \#008080
 			DARK_CYAN,
-			/// #C0C0C0
+			/// \#C0C0C0
 			GRAY,
-			/// #808080
+			/// \#808080
 			DARK_GRAY,
-			/// #FF0000
+			/// \#FF0000
 			RED,
-			/// #00FF00
+			/// \#00FF00
 			GREEN,
-			/// #FFFF00
+			/// \#FFFF00
 			YELLOW,
-			/// #0000FF
+			/// \#0000FF
 			BLUE,
-			/// #FF00FF
+			/// \#FF00FF
 			MAGENTA,
-			/// #00FFFF
+			/// \#00FFFF
 			CYAN,
-			/// #FFFFFF
+			/// \#FFFFFF
 			WHITE
 		};
 

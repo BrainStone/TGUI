@@ -1,4 +1,5 @@
 stages:
+- clean
 - build
 - doc
 - clean
