@@ -45,6 +45,9 @@ model {
                 if (toolChain in Gcc) {
                     cppCompiler.args "-Wall", "-Wextra", "-Wpedantic", "-fPIC"
                 }
+                if (toolChain in Clang) {
+                    cppCompiler.args "-Weverything", "-pedantic"
+                }
                 if (toolChain in VisualCpp) {
                     cppCompiler.args "/W4", "/FS", "/EHsc"
                 }
@@ -55,18 +58,24 @@ model {
                     if (toolChain in Gcc) {
                         cppCompiler.args "-Og", "-g3"
                     }
+                    if (toolChain in Clang) {
+                        cppCompiler.args "-O0", "-g"
+                    }
                     if (toolChain in VisualCpp) {
-                        cppCompiler.args "/Od", "/Zi"
+                        cppCompiler.args "/Od", "/Z7"
                     }
                 }
                 if(buildType == buildTypes.release) {
                     cppCompiler.define "__NDEBUG__"
 
                     if (toolChain in Gcc) {
-                        cppCompiler.args "-O2", "-g0"
+                        cppCompiler.args "-Ofast", "-g0"
+                    }
+                    if (toolChain in Gcc) {
+                        cppCompiler.args "-Ofast", "-g0"
                     }
                     if (toolChain in VisualCpp) {
-                        cppCompiler.args "/Ox"
+                        cppCompiler.args "/O2"
                     }
                 }
             }
