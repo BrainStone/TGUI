@@ -20,12 +20,12 @@ doc:
   - rm -r /var/www/doc/TGUI
   - mkdir -p /var/www/doc/TGUI/downloads
   - cp -r build/doc/gen/html/* /var/www/doc/TGUI/
-  - cp /build/doc/TGUI-doc.* .
+  - cp build/doc/TGUI-doc.* .
   - cp TGUI-doc.* /var/www/doc/TGUI/downloads/
   when: on_success
   artifacts:
     paths:
-    - /TGUI-doc.*
+    - TGUI-doc.*
   only:
   - master
 
