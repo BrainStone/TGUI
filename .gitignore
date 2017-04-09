@@ -1,36 +1,19 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-*.d
+# =========================
+# Development Environment
+# =========================
 
-# Precompiled Headers
-*.gch
-*.pch
+# Gradle
+# =========================
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+.gradle
+build
 
-# Fortran module files
-*.mod
+# Eclipse
+# =========================
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# Doxygen
-doc/gen
-TGUI-doc.*
+.cproject
+.project
+.settings
 
 # =========================
 # Operating System Files
@@ -82,17 +65,3 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
-
-# Eclipse
-# =========================
-
-.cproject
-.project
-.settings
-
-# Gradle
-# =========================
-
-.gradle
-build
