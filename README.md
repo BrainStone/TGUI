@@ -1,5 +1,13 @@
 ![Logo](logo.png)
 
+- [Text-GUI-Library - A C++11 alternative for ncurses](#text-gui-library---a-c--11-alternative-for-ncurses)
+  * [Features](#features)
+  * [Installing](#installing)
+  * [Documentation](#documentation)
+  * [Copyright and License](#copyright-and-license)
+    + [Copyright](#copyright)
+    + [License](#license)
+
 # Text-GUI-Library - A C++11 alternative for ncurses
 
 Are you sick and tired of the old ncurses interface?<br />
@@ -49,7 +57,7 @@ installed. [`graphviz`](http://www.graphviz.org/), [`make`](https://www.gnu.org/
 You will then find a `TGUI-doc.zip` file and if you have `latex` installed a `TGUI-doc.pdf` file in the `build/doc`
 directory.
 
-## Legal Stuff
+## Copyright and License
 
 ### Copyright
 Copyright 2017 Yannick Schinko. All rights reserved
