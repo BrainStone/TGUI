@@ -1,13 +1,5 @@
 ![Logo](logo.png)
 
-- [Text-GUI-Library - A C++11 alternative for ncurses](#text-gui-library---a-c--11-alternative-for-ncurses)
-  * [Features](#features)
-  * [Installing](#installing)
-  * [Documentation](#documentation)
-  * [Copyright and License](#copyright-and-license)
-    + [Copyright](#copyright)
-    + [License](#license)
-
 # Text-GUI-Library - A C++11 alternative for ncurses
 
 Are you sick and tired of the old ncurses interface?<br />
@@ -16,6 +8,15 @@ Are you dreaming of a modern OO-interface that is easy to use?
 
 **Worry no more!**<br />
 This library provides just that!
+
+## Table of Content
+
+* [Features](#features)
+* [Installing](#installing)
+* [Documentation](#documentation)
+* [Copyright and License](#copyright-and-license)
+  + [Copyright](#copyright)
+  + [License](#license)
 
 ## Features
 
