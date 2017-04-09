@@ -30,7 +30,9 @@ To install simply run the following commands:<br />
 
 The compiled binaries will be located in the directory `build/libs`.
 
-Of course make sure you have a C++11 compiler, Java (required for gradle) and `git` installed.
+Of course make sure you have a C++11 compiler *(See [the gradle doc]
+(https://docs.gradle.org/3.4.1/userguide/native_software.html#native-binaries:tool-chain-support) to see which compilers are
+supported on your system)*, Java (required for gradle) and `git` installed.
 
 ## Documentation
 
@@ -39,12 +41,13 @@ You can also download the documentation in [HTML](https://doc.brainstonemod.com/
 [PDF](https://doc.brainstonemod.com/TGUI/downloads/TGUI-doc.pdf) format.
 
 You can also generate the documentation locally. However [`doxygen`](http://www.stack.nl/~dimitri/doxygen/) needs to be
-installed. [`graphviz`](http://www.graphviz.org/), [`make`](https://www.gnu.org/software/make/) and [`latex`](https://www.latex-project.org/) is not required but
-recommended. To generate the documentation locally run this command:
+installed. [`graphviz`](http://www.graphviz.org/), [`make`](https://www.gnu.org/software/make/) and [`latex`]
+(https://www.latex-project.org/) is not required but recommended. To generate the documentation locally run this command:
 
     ./gradlew doc
     
-You will then find a `TGUI-doc.zip` file and if you have `latex` installed a `TGUI-doc.pdf` file in the `build/doc` directory.
+You will then find a `TGUI-doc.zip` file and if you have `latex` installed a `TGUI-doc.pdf` file in the `build/doc`
+directory.
 
 ## Legal Stuff
 
