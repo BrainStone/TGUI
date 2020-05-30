@@ -1,6 +1,6 @@
 ![Logo](logo.png)
 
-# Text-GUI-Library - A C++11 alternative for ncurses
+# Text-GUI-Library - A C++17 alternative for ncurses
 
 Are you sick and tired of the old ncurses interface?<br />
 Do you just want to build an CLI application that has a decently usable GUI?<br />
@@ -21,7 +21,7 @@ This library provides just that!
 ## Features
 
 Here are the features:
-- Built for modern C++11
+- Built for modern C++17
 - Simple OO-API
 - Expandable with custom classes and elements
 - Minimal console output. (Only changed parts of the console will get printed)

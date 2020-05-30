@@ -38,6 +38,8 @@ namespace tgui {
 		public:
 			cell ();
 
+			virtual void render ( screen::color &last_foreground, screen::color &last_background ) const;
+
 			virtual bool operator == ( const cell &rhs ) const;
 			virtual bool operator != ( const cell &rhs ) const;
 		};

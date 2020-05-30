@@ -23,6 +23,23 @@ namespace tgui {
 	screen_buffer::cell::cell () : character( L' ' ), foreground( screen::color::WHITE ), background( screen::color::BLACK ) {
 	}
 
+	void screen_buffer::cell::render ( screen::color &last_foreground, screen::color &last_background ) const {
+		bool foreground_differs = foreground != last_foreground;
+		bool background_differs = background != last_background;
+
+		if ( foreground_differs && background_differs )
+			screen::set_color( foreground, background );
+		else if ( foreground_differs )
+			screen::set_foreground_color (foreground);
+		else if ( background_differs )
+			screen::set_background_color (background);
+
+		std::wcout << character;
+
+		last_foreground = foreground;
+		last_background = background;
+	}
+
 	bool screen_buffer::cell::operator == ( const cell &rhs ) const {
 		return (character == rhs.character) && (foreground == rhs.foreground) && (background == rhs.background);
 	}
@@ -48,9 +65,28 @@ namespace tgui {
 			};
 		}
 
-		screen::set_cursor_position( 0, 0 );
+		screen::position cur_pos;
+		screen::color last_foreground = screen::color::WHITE;
+		screen::color last_background = screen::color::BLACK;
+		bool continuous = true;
 
-		// TODO actual rendering
+		screen::set_cursor_position( 0, 0 );
+		screen::set_color( last_foreground, last_background );
+
+		for ( cur_pos.column = 0; cur_pos.column < size.column; ++cur_pos.column ) {
+			for ( cur_pos.row = 0; cur_pos.row < size.row; ++cur_pos.row ) {
+				if ( cell_changed( cur_pos ) ) {
+					if ( !continuous )
+						screen::set_cursor_position( cur_pos );
+
+					cells[cur_pos.column][cur_pos.row].render( last_foreground, last_background );
+
+					continuous = true;
+				} else {
+					continuous = false;
+				}
+			}
+		}
 	}
 
 	bool screen_buffer::operator == ( const screen_buffer &rhs ) const {
