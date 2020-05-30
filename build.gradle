@@ -5,86 +5,59 @@ import java.nio.file.Files
 
 plugins {
     // Project Type
-    id "cpp"
+    id "cpp-library"
     // IDEs
     id "visual-studio"
     // Code Formatter
     id "com.diffplug.gradle.spotless" version "4.0.1"
 }
 
-model {
-    platforms {
-        x64 {
-            architecture "x86_64"
+library {
+    linkage = [Linkage.STATIC, Linkage.SHARED]
+    
+    source.from file('src')
+    publicHeaders.from file('src')
+    //privateHeaders.from file('src')
+    //publicHeaders.from file('include')
+    
+    binaries.configureEach {
+        def compTask     = compileTask.get()
+        def compilerArgs = compTask.compilerArgs
+        def macros       = compTask.macros
+
+        if (toolChain in Gcc) {
+            compilerArgs.addAll "-Wall", "-Wextra", "-Wpedantic", "-fPIC"
         }
-        x86 {
-            architecture "x86"
+        if (toolChain in Clang) {
+            compilerArgs.addAll "-Weverything", "-pedantic"
         }
-    }
+        if (toolChain in VisualCpp) {
+            compilerArgs.addAll "/W4", "/FS", "/EHsc"
+        }
 
-    buildTypes {
-        debug
-        release
-    }
+        if (optimized) {
+            macros.put("__NDEBUG__", null)
 
-    components {
-        tgui(NativeLibrarySpec) {
-            if(System.properties['sun.arch.data.model'] == "64") {
-                targetPlatform "x64"
-            } else {
-                targetPlatform "x86"
+            if (toolChain in Gcc) {
+                compilerArgs.addAll "-Ofast", "-g0"
             }
-
-            sources {
-                cpp {
-                    source {
-                        srcDirs "src"
-                        include "**/*.cpp"
-                    }
-                    exportedHeaders {
-                        srcDirs "src"
-                        include "**/*.hpp"
-                    }
-                }
+            if (toolChain in Clang) {
+                compilerArgs.addAll "-Ofast", "-g0"
             }
+            if (toolChain in VisualCpp) {
+                compilerArgs.addAll "/O2"
+            }
+        } else {
+            macros.put("__DEBUG__", null)
 
-            binaries.all {
-                if (toolChain in Gcc) {
-                    cppCompiler.args "-Wall", "-Wextra", "-Wpedantic", "-fPIC"
-                }
-                if (toolChain in Clang) {
-                    cppCompiler.args "-Weverything", "-pedantic"
-                }
-                if (toolChain in VisualCpp) {
-                    cppCompiler.args "/W4", "/FS", "/EHsc"
-                }
-
-                if(buildType == buildTypes.debug) {
-                    cppCompiler.define "__DEBUG__"
-
-                    if (toolChain in Gcc) {
-                        cppCompiler.args "-Og", "-g3"
-                    }
-                    if (toolChain in Clang) {
-                        cppCompiler.args "-O0", "-g"
-                    }
-                    if (toolChain in VisualCpp) {
-                        cppCompiler.args "/Od", "/Z7"
-                    }
-                }
-                if(buildType == buildTypes.release) {
-                    cppCompiler.define "__NDEBUG__"
-
-                    if (toolChain in Gcc) {
-                        cppCompiler.args "-Ofast", "-g0"
-                    }
-                    if (toolChain in Gcc) {
-                        cppCompiler.args "-Ofast", "-g0"
-                    }
-                    if (toolChain in VisualCpp) {
-                        cppCompiler.args "/O2"
-                    }
-                }
+            if (toolChain in Gcc) {
+                compilerArgs.addAll "-Og", "-g3"
+            }
+            if (toolChain in Clang) {
+                compilerArgs.addAll "-O0", "-g"
+            }
+            if (toolChain in VisualCpp) {
+                compilerArgs.addAll "/Od", "/Z7"
             }
         }
     }
