@@ -26,13 +26,13 @@ library {
         def macros       = compTask.macros
 
         if (toolChain in Gcc) {
-            compilerArgs.addAll "-Wall", "-Wextra", "-Wpedantic", "-fPIC"
+            compilerArgs.addAll "-std=c++1z", "-Wall", "-Wextra", "-Wpedantic", "-fPIC"
         }
         if (toolChain in Clang) {
-            compilerArgs.addAll "-Weverything", "-pedantic"
+            compilerArgs.addAll "-std=c++1z", "-Weverything", "-pedantic"
         }
         if (toolChain in VisualCpp) {
-            compilerArgs.addAll "/W4", "/FS", "/EHsc"
+            compilerArgs.addAll "/std:c++17", "/W4", "/FS", "/EHsc"
         }
 
         if (optimized) {
