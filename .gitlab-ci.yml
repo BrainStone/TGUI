@@ -13,7 +13,7 @@ build:
     policy: push
   script:
   - ./gradlew --console=plain assemble 
-  - du -h build/libs/tgui/*/*/*
+  - du -cbh build/lib/main/*/*/*
   when: on_success
 
 checkFormatting:
