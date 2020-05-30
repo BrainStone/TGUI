@@ -1,7 +1,7 @@
 /*
  * TGUI
  * Text-GUI-Library - A C++11 alternative for ncurses
- * Copyright (C) 2017 Yannick Schinko
+ * Copyright (C) 2017-2020 Yannick Schinko
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -59,8 +59,8 @@ namespace tgui {
 		virtual void render ( bool clear_screen = false );
 	public:
 		application ( int fps = 10, bool auto_rerender = true );
-		application ( const application& cpy ) = delete;
-		application ( application&& cpy ) = delete;
+		application ( const application &cpy ) = delete;
+		application ( application &&cpy ) = delete;
 		virtual ~application ();
 	};
 }

@@ -1,7 +1,7 @@
 /*
  * TGUI
  * Text-GUI-Library - A C++11 alternative for ncurses
- * Copyright (C) 2017 Yannick Schinko
+ * Copyright (C) 2017-2020 Yannick Schinko
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -60,8 +60,8 @@ namespace tgui {
 			coord_type column;
 			coord_type row;
 
-			bool operator == ( const position& rhs ) const;
-			bool operator != ( const position& rhs ) const;
+			bool operator == ( const position &rhs ) const;
+			bool operator != ( const position &rhs ) const;
 		};
 
 		/**
@@ -107,13 +107,13 @@ namespace tgui {
 
 		position get_size ();
 
-		void set_cursor_position ( const position& pos );
+		void set_cursor_position ( const position &pos );
 		void set_cursor_position ( coord_type column, coord_type row );
-		void move_cursor_position ( const position& pos );
+		void move_cursor_position ( const position &pos );
 		void move_cursor_position ( coord_type column, coord_type row );
-		void set_color ( const color& foreground, const color& background );
-		void set_foreground_color ( const color& foreground );
-		void set_background_color ( const color& background );
+		void set_color ( const color &foreground, const color &background );
+		void set_foreground_color ( const color &foreground );
+		void set_background_color ( const color &background );
 		void set_cursor_visible ( bool visible );
 
 		void clear_screen ();

@@ -1,7 +1,7 @@
 /*
  * TGUI
  * Text-GUI-Library - A C++11 alternative for ncurses
- * Copyright (C) 2017 Yannick Schinko
+ * Copyright (C) 2017-2020 Yannick Schinko
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,8 +27,8 @@
 
 namespace tgui {
 	void application::on_screen_resize ( screen::size new_size ) {
-		old_buffer = std::shared_ptr<screen_buffer>( new screen_buffer( new_size ) );
-		new_buffer = std::shared_ptr<screen_buffer>( new screen_buffer( new_size ) );
+		old_buffer = std::shared_ptr < screen_buffer > (new screen_buffer( new_size ));
+		new_buffer = std::shared_ptr < screen_buffer > (new screen_buffer( new_size ));
 
 		render( true );
 	}
@@ -36,11 +36,11 @@ namespace tgui {
 	void application::render_loop () {
 		using namespace std::chrono;
 
-		steady_clock::duration time_step = duration_cast<steady_clock::duration>( seconds( 1 ) ) / fps;
+		steady_clock::duration time_step = duration_cast < steady_clock::duration > (seconds( 1 )) / fps;
 		steady_clock::time_point next_frame = steady_clock::now();
 		steady_clock::time_point now;
 		std::mutex render_loop_cv_m;
-		std::unique_lock<std::mutex> render_loop_cv_lock( render_loop_cv_m );
+		std::unique_lock < std::mutex > render_loop_cv_lock( render_loop_cv_m );
 
 		while ( run_render_loop ) {
 			render();
@@ -51,29 +51,29 @@ namespace tgui {
 				next_frame += time_step;
 			} while ( next_frame > now );
 
-			render_loop_cv.wait_until( render_loop_cv_lock, next_frame, [this, &next_frame] {
+			render_loop_cv.wait_until( render_loop_cv_lock, next_frame, [ this, &next_frame ] {
 				return (steady_clock::now() >= next_frame) || !run_render_loop;
-			} );
+			});
 		}
 	}
 
 	void application::render_objects () {
-		std::lock_guard<std::mutex> object_guard( object_lock );
+		std::lock_guard < std::mutex > object_guard( object_lock );
 
 		// TODO render_objects
 	}
 
 	void application::render_to_screen () {
-		std::lock_guard<std::mutex> render_guard( render_lock );
+		std::lock_guard < std::mutex > render_guard( render_lock );
 
 		new_buffer->render( *old_buffer );
 
 		old_buffer = new_buffer;
-		new_buffer = std::shared_ptr<screen_buffer>( new screen_buffer( size ) );
+		new_buffer = std::shared_ptr < screen_buffer > (new screen_buffer( size ));
 	}
 
 	void application::render ( bool clear_screen ) {
-		std::lock_guard<std::mutex> object_guard( buffer_lock );
+		std::lock_guard < std::mutex > object_guard( buffer_lock );
 
 		render_objects();
 
@@ -83,10 +83,9 @@ namespace tgui {
 		render_to_screen();
 	}
 
-	application::application ( int fps, bool auto_rerender ) :
-			fps( fps ), auto_rerender( auto_rerender ), run_render_loop( true ), render_thread( &application::render_loop,
-					this ), size( screen::get_size() ), old_buffer( new screen_buffer( size ) ), new_buffer(
-					new screen_buffer( size ) ) {
+	application::application ( int fps, bool auto_rerender ) : fps( fps ), auto_rerender( auto_rerender ), run_render_loop(
+			true ), render_thread( &application::render_loop, this ), size( screen::get_size() ), old_buffer(
+			new screen_buffer( size ) ), new_buffer( new screen_buffer( size ) ) {
 		if ( auto_rerender ) {
 			screen::register_resize_callback( std::bind( &application::on_screen_resize, this, std::placeholders::_1 ) );
 		}

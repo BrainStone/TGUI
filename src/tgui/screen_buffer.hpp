@@ -1,7 +1,7 @@
 /*
  * TGUI
  * Text-GUI-Library - A C++11 alternative for ncurses
- * Copyright (C) 2017 Yannick Schinko
+ * Copyright (C) 2017-2020 Yannick Schinko
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,8 +38,8 @@ namespace tgui {
 		public:
 			cell ();
 
-			virtual bool operator == ( const cell& rhs ) const;
-			virtual bool operator != ( const cell& rhs ) const;
+			virtual bool operator == ( const cell &rhs ) const;
+			virtual bool operator != ( const cell &rhs ) const;
 		};
 
 	protected:
@@ -47,13 +47,13 @@ namespace tgui {
 		screen::size size;
 
 	public:
-		screen_buffer ( const screen::size& size );
+		screen_buffer ( const screen::size &size );
 		virtual ~screen_buffer () = default;
 
-		virtual void render ( const screen_buffer& old_buffer ) const;
+		virtual void render ( const screen_buffer &old_buffer ) const;
 
-		virtual bool operator == ( const screen_buffer& rhs ) const;
-		virtual bool operator != ( const screen_buffer& rhs ) const;
+		virtual bool operator == ( const screen_buffer &rhs ) const;
+		virtual bool operator != ( const screen_buffer &rhs ) const;
 	};
 }
 

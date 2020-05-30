@@ -8,6 +8,8 @@ plugins {
     id "cpp"
     // IDEs
     id "visual-studio"
+    // Code Formatter
+    id "com.diffplug.gradle.spotless" version "4.0.1"
 }
 
 model {
@@ -85,6 +87,14 @@ model {
                 }
             }
         }
+    }
+}
+
+spotless {
+    cpp {
+        eclipse().configFile "TGUI-Code-Format.xml"
+
+        licenseHeaderFile "LICENSE-header.txt", "#"
     }
 }
 
