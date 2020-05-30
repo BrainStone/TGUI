@@ -1,38 +1,40 @@
+cache:
+  key: "$CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
+  untracked: true
+
 stages:
 - build
+- test
 - doc
-- clean
   
 build:
   stage: build
+  cache:
+    policy: push
   script:
-  - ./gradlew clean
-  - ./gradlew build 
+  - ./gradlew --console=plain build 
   - du -h build/libs/tgui/*/*/*
   when: on_success
   except:
   - tags
 
+checkFormatting:
+  stage: test
+  cache:
+    policy: pull
+  script:
+  - ./gradlew --continue --console=plain spotlessCheck
+  allow_failure: true
+  when: on_success
+
 doc:
   stage: doc
   script:
-  - ./gradlew doc
-  - rm -r /var/www/doc/TGUI
-  - mkdir -p /var/www/doc/TGUI/downloads
-  - cp -r build/doc/gen/html/* /var/www/doc/TGUI/
+  - ./gradlew --console=plain doc
   - cp build/doc/TGUI-doc.* .
-  - cp TGUI-doc.* /var/www/doc/TGUI/downloads/
   when: on_success
   artifacts:
     paths:
     - TGUI-doc.*
   only:
   - master
-
-clean:
-  stage: clean
-  script:
-  - ./gradlew clean
-  when: always
-  except:
-  - tags
