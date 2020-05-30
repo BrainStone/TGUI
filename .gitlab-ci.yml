@@ -15,8 +15,6 @@ build:
   - ./gradlew --console=plain assemble 
   - du -h build/libs/tgui/*/*/*
   when: on_success
-  except:
-  - tags
 
 checkFormatting:
   stage: test
@@ -29,6 +27,8 @@ checkFormatting:
 
 doc:
   stage: doc
+  cache:
+    policy: pull
   script:
   - ./gradlew --console=plain doc
   - cp build/doc/TGUI-doc.* .
@@ -36,5 +36,3 @@ doc:
   artifacts:
     paths:
     - TGUI-doc.*
-  only:
-  - master
