@@ -1,6 +1,6 @@
 /*
  * TGUI
- * Text-GUI-Library - A C++11 alternative for ncurses
+ * Text-GUI-Library - A C++17 alternative for ncurses
  * Copyright (C) 2017-2020 Yannick Schinko
  *
  * This program is free software: you can redistribute it and/or modify
