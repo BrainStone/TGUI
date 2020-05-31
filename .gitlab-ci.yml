@@ -12,9 +12,14 @@ build:
   cache:
     policy: push
   script:
-  - ./gradlew --console=plain assemble 
-  - du -cbh build/lib/main/*/*/*
+  - ./gradlew --console=plain assemble
+  - cp -r build/lib/main/{debug,release} .
+  - du -cbh {debug,release}/*/*
   when: on_success
+  artifacts:
+    paths:
+    - debug
+    - release
 
 checkFormatting:
   stage: test
