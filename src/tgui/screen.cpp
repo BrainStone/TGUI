@@ -216,23 +216,22 @@ namespace tgui {
 
 		void register_resize_callback ( std::function<void ( position )> callback ) {
 			if ( details::resize_callbacks.empty() ) {
-				new std::thread(
-						[] {
-							INPUT_RECORD event;
-							DWORD num_events;
+				std::async(std::launch::async, [] {
+					INPUT_RECORD event;
+					DWORD num_events;
 
-							while(true) {
-								ReadConsoleInput(details::hStdout, &event, 1, &num_events);
+					while (true) {
+						ReadConsoleInput(details::hStdout, &event, 1, &num_events);
 
-								if(event.EventType == WINDOW_BUFFER_SIZE_EVENT) {
-									position size {event.Event.WindowBufferSizeEvent.dwSize.X, event.Event.WindowBufferSizeEvent.dwSize.Y};
+						if (event.EventType == WINDOW_BUFFER_SIZE_EVENT) {
+							position size{event.Event.WindowBufferSizeEvent.dwSize.X, event.Event.WindowBufferSizeEvent.dwSize.Y};
 
-									for ( const resize_callback& callback : details::resize_callbacks ) {
-										callback( size );
-									}
-								}
+							for (const resize_callback& callback : details::resize_callbacks) {
+								callback(size);
 							}
-						} );
+						}
+					}
+				});
 			}
 
 			details::resize_callbacks.push_back( callback );
