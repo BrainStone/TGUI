@@ -27,7 +27,7 @@
 
 namespace tgui {
 	namespace screen {
-		std::list<resize_callback> details::resize_callbacks;
+		std::vector<resize_callback> details::resize_callbacks;
 
 		bool position::operator == ( const position& rhs ) const {
 			return (column == rhs.column) && (row == rhs.row);
