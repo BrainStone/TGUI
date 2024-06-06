@@ -40,7 +40,7 @@ namespace tgui {
 		steady_clock::time_point next_frame = steady_clock::now();
 		steady_clock::time_point now;
 		std::mutex render_loop_cv_m;
-		std::unique_lock<std::mutex> render_loop_cv_lock( render_loop_cv_m );
+		std::unique_lock render_loop_cv_lock( render_loop_cv_m );
 
 		while ( run_render_loop ) {
 			render();
