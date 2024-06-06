@@ -27,8 +27,8 @@
 
 namespace tgui {
 	void application::on_screen_resize ( screen::size new_size ) {
-		old_buffer = std::shared_ptr<screen_buffer>( new screen_buffer( new_size ) );
-		new_buffer = std::shared_ptr<screen_buffer>( new screen_buffer( new_size ) );
+		old_buffer = std::make_shared<screen_buffer>( new_size );
+		new_buffer = std::make_shared<screen_buffer>( new_size );
 
 		render( true );
 	}
@@ -69,7 +69,7 @@ namespace tgui {
 		new_buffer->render( *old_buffer );
 
 		old_buffer = new_buffer;
-		new_buffer = std::shared_ptr<screen_buffer>( new screen_buffer( size ) );
+		new_buffer = std::make_shared<screen_buffer>( size );
 	}
 
 	void application::render ( bool clear_screen ) {
