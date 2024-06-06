@@ -58,13 +58,13 @@ namespace tgui {
 	}
 
 	void application::render_objects () {
-		std::lock_guard<std::mutex> object_guard( object_lock );
+		std::scoped_lock object_guard( object_lock );
 
 		// TODO render_objects
 	}
 
 	void application::render_to_screen () {
-		std::lock_guard<std::mutex> render_guard( render_lock );
+		std::scoped_lock render_guard( render_lock );
 
 		new_buffer->render( *old_buffer );
 
@@ -73,7 +73,7 @@ namespace tgui {
 	}
 
 	void application::render ( bool clear_screen ) {
-		std::lock_guard<std::mutex> object_guard( buffer_lock );
+		std::scoped_lock object_guard( buffer_lock );
 
 		render_objects();
 
