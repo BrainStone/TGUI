@@ -37,6 +37,7 @@ namespace tgui {
 
 		public:
 			cell ();
+			virtual ~cell () = default;
 
 			virtual void render ( screen::color& last_foreground, screen::color& last_background ) const;
 
