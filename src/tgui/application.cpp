@@ -27,8 +27,8 @@
 
 namespace tgui {
 	void application::on_screen_resize ( screen::size new_size ) {
-		old_buffer = std::shared_ptr<screen_buffer>( new screen_buffer( new_size ) );
-		new_buffer = std::shared_ptr<screen_buffer>( new screen_buffer( new_size ) );
+		old_buffer = std::make_shared<screen_buffer>( new_size );
+		new_buffer = std::make_shared<screen_buffer>( new_size );
 
 		render( true );
 	}
@@ -40,7 +40,7 @@ namespace tgui {
 		steady_clock::time_point next_frame = steady_clock::now();
 		steady_clock::time_point now;
 		std::mutex render_loop_cv_m;
-		std::unique_lock<std::mutex> render_loop_cv_lock( render_loop_cv_m );
+		std::unique_lock render_loop_cv_lock( render_loop_cv_m );
 
 		while ( run_render_loop ) {
 			render();
@@ -58,22 +58,22 @@ namespace tgui {
 	}
 
 	void application::render_objects () {
-		std::lock_guard<std::mutex> object_guard( object_lock );
+		std::scoped_lock object_guard( object_lock );
 
 		// TODO render_objects
 	}
 
 	void application::render_to_screen () {
-		std::lock_guard<std::mutex> render_guard( render_lock );
+		std::scoped_lock render_guard( render_lock );
 
 		new_buffer->render( *old_buffer );
 
 		old_buffer = new_buffer;
-		new_buffer = std::shared_ptr<screen_buffer>( new screen_buffer( size ) );
+		new_buffer = std::make_shared<screen_buffer>( size );
 	}
 
 	void application::render ( bool clear_screen ) {
-		std::lock_guard<std::mutex> object_guard( buffer_lock );
+		std::scoped_lock object_guard( buffer_lock );
 
 		render_objects();
 
